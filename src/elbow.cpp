@@ -1,7 +1,7 @@
 #include <algorithm>
 #include <cmath>
-#include <map>
 #include <iostream>
+#include <map>
 
 #include "elbow.h"
 #include "io.h"
@@ -26,9 +26,10 @@ float elbow::secondDerivative(std::vector<float>& x)
             slope = roc;
         }
     }
-    std::cout << "  elbow value: " << yVal << std::endl;
-    const std::string dist = io::pwd() + "/build/bin/circumference.csv";
-    io::write_val(x, dist);
+    // helpers for quick assessment:
+    // std::cout << "  elbow value: " << yVal << std::endl;
+    // const std::string dist = io::pwd() + "/build/bin/circumference.csv";
+    // io::write_val(x, dist);
     return yVal;
 }
 
@@ -55,8 +56,10 @@ float elbow::firstDerivative(const std::vector<float>& x)
     float elbow = secondDerivative(derivatives);
     it = derivativeMap.find(elbow);
 
-    // std::cout << "  max value: " << *std::max_element(x.begin(), x.end()) << std::endl;
-    // std::cout << "  min value: " << *std::min_element(x.begin(), x.end()) << std::endl; std::cout << "elbow value: " << it->second << std::endl;
+    // std::cout << "  max value: " << *std::max_element(x.begin(), x.end()) <<
+    // std::endl; std::cout << "  min value: " << *std::min_element(x.begin(),
+    // x.end()) << std::endl; std::cout << "elbow value: " << it->second <<
+    // std::endl;
 
     return it->second;
 }
@@ -67,15 +70,3 @@ float elbow::analyze(const std::vector<float>& x)
     float axisEdge = firstDerivative(x);
     return axisEdge;
 }
-
-// const std::string xMax = io::pwd() + "/build/bin/xMax.csv";
-// io::write_val(x, xMax);
-
-// const std::string xMin = io::pwd() + "/build/bin/xMin.csv";
-// io::write_val(x, xMin);
-
-// const std::string yMax = io::pwd() + "/build/bin/yMax.csv";
-// io::write_val(x, yMax);
-
-// const std::string yMin = io::pwd() + "/build/bin/yMin.csv";
-// io::write_val(x, yMin);
