@@ -4,10 +4,11 @@
 #include <map>
 
 #include "elbow.h"
+#include "outliers.h"
 #include "io.h"
 
 /** evaluate the second derivative */
-float elbow::secondDerivative(std::vector<float>& x)
+float secondDerivative(std::vector<float>& x)
 {
     /** sort in descending order */
     std::sort(x.begin(), x.end(), std::greater<>());
@@ -34,8 +35,10 @@ float elbow::secondDerivative(std::vector<float>& x)
 }
 
 /** evaluate the first derivative */
-float elbow::firstDerivative(const std::vector<float>& x)
+float firstDerivative(std::vector<float>& x)
 {
+    std::sort(x.begin(), x.end(), std::greater<>());
+    io::write(x, "./output/knn.csv");
 
     /** keep track of the axis value (yValue) and its
      *  corresponding derivative d1 { yVal, d1 } using a map */
@@ -65,7 +68,7 @@ float elbow::firstDerivative(const std::vector<float>& x)
 }
 
 /** remove successive axis values*/
-float elbow::analyze(const std::vector<float>& x)
+float elbow::analyze(std::vector<float>& x)
 {
     float axisEdge = firstDerivative(x);
     return axisEdge;
